@@ -1,20 +1,21 @@
 import React from 'react'
+import { AddIcon } from 'native-base'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 
-import { AddIcon } from 'native-base'
-import { TodoStack } from '../stack'
+import { TodoStack, HomeStack } from '../stack'
 import { RootTabsParamList, TABS } from './model'
+import useIsDarkMode from '../../../../shared/hooks/useDarkTheme'
 
 const TABS_ROUTES: TABS[] = [
   {
-    id: 'todos',
-    name: 'Todos',
-    component: TodoStack,
+    id: 'home',
+    name: 'Home',
+    component: HomeStack,
     Icon: <AddIcon />,
   },
   {
-    id: 'updates',
-    name: 'Updates',
+    id: 'todos',
+    name: 'Todos',
     component: TodoStack,
     Icon: <AddIcon />,
   },
@@ -29,15 +30,17 @@ const TABS_ROUTES: TABS[] = [
 const Tab = createMaterialBottomTabNavigator<RootTabsParamList>()
 
 function TabNavigation() {
+  const { backgroundStyleSecondary, textColorPrimary, textColorSecondary } =
+    useIsDarkMode()
+
   return (
     <Tab.Navigator
       initialRouteName="Todos"
-      // barStyle={{
-      //   backgroundColor: backgroundStyleSecondary.backgroundColor,
-      // }}
-      // inactiveColor={textColorPrimary.color}
-      // activeColor={textColorSecondary.color}
-    >
+      barStyle={{
+        backgroundColor: backgroundStyleSecondary.backgroundColor,
+      }}
+      activeColor={textColorPrimary.color}
+      inactiveColor={textColorSecondary.color}>
       {TABS_ROUTES.map(val => (
         <Tab.Screen
           key={val.id}

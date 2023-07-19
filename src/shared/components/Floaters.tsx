@@ -1,13 +1,15 @@
 import React from 'react'
 import { StatusBar } from 'expo-status-bar'
-import { Fab, useColorMode, Icon } from 'native-base'
+import { Fab, Icon } from 'native-base'
 
 import { Ionicons } from '@expo/vector-icons'
 
 import Logo from './Logo'
+import useIsDarkMode from '../hooks/useDarkTheme'
 
 function Floaters() {
-  const { colorMode, toggleColorMode } = useColorMode()
+  const { backgroundStyleSecondary, colorMode, toggleColorMode } =
+    useIsDarkMode()
 
   return (
     <>
@@ -24,7 +26,7 @@ function Floaters() {
       />
       <StatusBar
         style={colorMode === 'dark' ? 'light' : 'dark'}
-        backgroundColor={colorMode === 'dark' ? '#000' : '#ffff'}
+        backgroundColor={backgroundStyleSecondary.backgroundColor}
         translucent
       />
       <Fab

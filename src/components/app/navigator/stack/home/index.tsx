@@ -1,37 +1,51 @@
 import React from 'react'
-// import { StyleSheet, View } from 'react-native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-
-// import { Button } from 'native-base'
-import { RootStackHomeParamList } from '../model'
+import { createStackNavigator } from '@react-navigation/stack'
+// import { HStack, Icon, IconButton } from 'native-base'
+// import { MaterialIcons } from '@expo/vector-icons'
 
 import Home from '../../../../screens/home'
+import { RootStackHomeParamList } from '../model'
+import useIsDarkMode from '../../../../../shared/hooks/useDarkTheme'
 
-const Stack = createNativeStackNavigator<RootStackHomeParamList>()
+const Stack = createStackNavigator<RootStackHomeParamList>()
 
-// function HeaderRight() {
+// const HeaderRight = () => {
 //   return (
-//     <View style={{ ...styles.headerRight }}>
-//       <Button />
-//     </View>
+//     <HStack>
+//       <IconButton
+//         icon={
+//           <Icon as={MaterialIcons} name="favorite" size="sm" color="white" />
+//         }
+//       />
+//       <IconButton
+//         icon={<Icon as={MaterialIcons} name="search" size="sm" color="white" />}
+//       />
+//       <IconButton
+//         icon={
+//           <Icon as={MaterialIcons} name="more-vert" size="sm" color="white" />
+//         }
+//       />
+//     </HStack>
 //   )
 // }
 
 function StackNavigator() {
+  const { backgroundStylePrimary, backgroundStyleSecondary } = useIsDarkMode()
+
   return (
     <Stack.Navigator
       screenOptions={{
-        // cardStyle: {
-        //   flex: 1,
-        //   backgroundColor: backgroundStylePrimary.backgroundColor,
-        // },
-        // headerMode: 'screen',
-        // headerTintColor: textColorPrimary.color,
-        // headerStyle: {
-        //   backgroundColor: backgroundStylePrimary.backgroundColor,
-        //   //   elevation: 0,
-        //   //   shadowOpacity: 0,
-        // },
+        cardStyle: {
+          flex: 1,
+          backgroundColor: backgroundStylePrimary.backgroundColor,
+        },
+        headerMode: 'screen',
+        headerTintColor: backgroundStylePrimary.backgroundColor,
+        headerStyle: {
+          backgroundColor: backgroundStyleSecondary.backgroundColor,
+          elevation: 0,
+          shadowOpacity: 0,
+        },
         presentation: 'transparentModal',
       }}>
       <Stack.Screen
@@ -42,25 +56,8 @@ function StackNavigator() {
           // headerRight: () => <HeaderRight />,
         }}
       />
-      {/* <Stack.Screen
-        name="DetailsTodo"
-        component={DetailsScreen}
-        options={{
-          headerTitle: '',
-          headerRight: () => <HeaderRight />,
-        }}
-      /> */}
     </Stack.Navigator>
   )
 }
 
 export default StackNavigator
-
-// const styles = StyleSheet.create({
-//   headerRight: {
-//     width: 150,
-//     flexDirection: 'row',
-//     justifyContent: 'space-between',
-//     alignItems: 'center',
-//   },
-// })

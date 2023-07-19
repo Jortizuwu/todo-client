@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import { Button } from 'native-base'
 
 import { Props } from './model'
 
@@ -16,10 +17,10 @@ const styles = StyleSheet.create({
 })
 
 function Home({ navigation }: Props) {
-  console.log(navigation)
   return (
     <View style={styles.container}>
-      <Text>MORE UWU</Text>
+      <Text>Hola </Text>
+      <Button onPress={() => navigation.navigate('Home')}>got to</Button>
     </View>
   )
 }

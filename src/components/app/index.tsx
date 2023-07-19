@@ -1,9 +1,10 @@
 import React from 'react'
+import {} from 'react-native'
 import { NativeBaseProvider } from 'native-base'
 
-import BaseTheme from '../../shared/theme'
-import Floaters from '../../shared/components/Floaters'
 import MainNavigator from './navigator'
+import { BaseTheme } from '../../shared/theme'
+import Floaters from '../../shared/components/Floaters'
 
 function App() {
   return (

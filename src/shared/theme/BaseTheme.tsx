@@ -21,15 +21,29 @@ const BaseTheme = extendTheme({
       800: '#252525',
       900: '#0d0c0d',
     },
+    dark: {
+      primary: '#202020',
+      secondary: '#171717',
+      textPrimary: '#fff',
+      textSecondary: '#FFAFCC',
+      textTertiary: '#FFD100',
+    },
+    light: {
+      primary: '#F3F4F8',
+      secondary: '#F9F9F9',
+      textPrimary: '#000',
+      textSecondary: '#FFAFCC',
+      textTertiary: '#FFD100',
+    },
   },
   Pressable: {
     cursor: 'pointer',
   },
 
-  // config: {
-  //   // Changing initialColorMode to 'dark'
-  //   initialColorMode: 'dark',
-  // },
+  config: {
+    // Changing initialColorMode to 'dark'
+    initialColorMode: 'dark',
+  },
 })
 
 export default BaseTheme
