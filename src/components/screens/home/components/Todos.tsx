@@ -2,7 +2,7 @@ import React from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons'
 
 import {
-  Box,
+  Button,
   FlatList,
   HStack,
   Heading,
@@ -11,7 +11,13 @@ import {
   VStack,
   View,
 } from 'native-base'
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
+
 import useIsDarkMode from '../../../../shared/hooks/useDarkTheme'
+import { RootStackTodoParamList } from '../../../app/navigator/stack/model'
+
+type NavigationProps = StackNavigationProp<RootStackTodoParamList>
 
 const data = [
   {
@@ -58,13 +64,20 @@ const data = [
 function Todos() {
   const { backgroundStyleSecondary } = useIsDarkMode()
 
+  const { navigate } = useNavigation<NavigationProps>()
+
   return (
     <View>
       <Heading mb="2">Users todos</Heading>
       <FlatList
         data={data}
         renderItem={({ item }) => (
-          <Box
+          <Button
+            onPress={() =>
+              navigate('TodoDetails', {
+                id: item.id,
+              })
+            }
             borderRadius="xl"
             // shadow="1"
             p="4"
@@ -89,7 +102,7 @@ function Todos() {
               </HStack>
               <Text fontSize="xs">{item.timeStamp}</Text>
             </HStack>
-          </Box>
+          </Button>
         )}
         keyExtractor={item => item.id}
       />

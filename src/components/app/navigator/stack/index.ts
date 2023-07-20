@@ -1,4 +1,4 @@
-import TodoStack from './todo'
+import TodoStack from './todos'
 import HomeStack from './home'
 import SettingsStack from './settings'
 

@@ -1,55 +1,80 @@
 import React from 'react'
-import { Center, Heading, SectionList } from 'native-base'
+import {
+  Box,
+  Center,
+  Divider,
+  FlatList,
+  HStack,
+  Heading,
+  Icon,
+  Text,
+  VStack,
+} from 'native-base'
+import { Ionicons } from '@expo/vector-icons'
+import DarkMode from '../../../shared/components/DarkMode'
 
 const data = [
   {
-    title: 'Cyan',
-    data: ['cyan.100', 'cyan.200', 'cyan.300', 'cyan.400', 'cyan.500'],
+    title: 'Appearence',
+    to: 'appearence',
+    description: 'hola mundo',
+    icon: (
+      <Icon
+        alignContent="center"
+        alignItems="center"
+        size="6"
+        as={<Ionicons name="settings-outline" />}
+      />
+    ),
   },
   {
-    title: 'Yellow',
-    data: [
-      'yellow.100',
-      'yellow.200',
-      'yellow.300',
-      'yellow.400',
-      'yellow.500',
-    ],
-  },
-  {
-    title: 'Violet',
-    data: [
-      'violet.100',
-      'violet.200',
-      'violet.300',
-      'violet.400',
-      'violet.500',
-    ],
+    title: 'Dark mode',
+    to: 'Enable or disbale dark mode',
+    description: 'hola mundo',
+    icon: (
+      <Icon
+        alignContent="center"
+        alignItems="center"
+        size="6"
+        as={<Ionicons name="settings-outline" />}
+      />
+    ),
+    switch: <DarkMode />,
   },
 ]
+
 function Settings() {
   return (
-    <Center h="80" w="100%">
-      <SectionList
-        maxW="300"
-        w="100%"
-        mb="4"
-        sections={data}
-        keyExtractor={(item, index) => item + index}
+    <Box>
+      <Center py="10">
+        <Icon
+          alignContent="center"
+          alignItems="center"
+          size="100"
+          as={<Ionicons name="settings-outline" />}
+        />
+      </Center>
+      <Divider />
+      <FlatList
+        w="full"
+        mt="2"
+        data={data}
+        // keyExtractor={(item, index) => item + index}r
         renderItem={({ item }) => (
-          <Center py="4" bg={item}>
-            {item.split('.')[1]}
-          </Center>
-        )}
-        renderSectionHeader={({ section: { title } }) => (
-          <Center>
-            <Heading fontSize="xl" mt="8" pb="4">
-              {title}
-            </Heading>
-          </Center>
+          <HStack w="100%" justifyContent="space-between" p="2">
+            <HStack alignContent="center" alignItems="center">
+              {item.icon}
+              <VStack ml="4">
+                <Heading fontSize="sm">{item.title}</Heading>
+                <Text fontSize="xs">{item?.description}</Text>
+              </VStack>
+            </HStack>
+            {item?.switch}
+          </HStack>
         )}
       />
-    </Center>
+      <Divider />
+    </Box>
   )
 }
 

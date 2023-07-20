@@ -3,8 +3,8 @@ import { Icon } from 'native-base'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 
-import { TodoStack, HomeStack, SettingsStack } from '../stack'
 import { RootTabsParamList, TABS } from './model'
+import { HomeStack, SettingsStack, TodoStack } from '../stack'
 import useIsDarkMode from '../../../../shared/hooks/useDarkTheme'
 
 const TABS_ROUTES: TABS[] = [
