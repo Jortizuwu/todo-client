@@ -8,6 +8,7 @@ const BaseTheme = extendTheme({
       },
     },
   },
+
   colors: {
     slateGray: {
       50: '#f3f2f2',

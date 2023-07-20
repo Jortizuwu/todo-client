@@ -30,7 +30,8 @@ const Stack = createStackNavigator<RootStackHomeParamList>()
 // }
 
 function StackNavigator() {
-  const { backgroundStylePrimary, backgroundStyleSecondary } = useIsDarkMode()
+  const { backgroundStylePrimary, backgroundStyleSecondary, textColorPrimary } =
+    useIsDarkMode()
 
   return (
     <Stack.Navigator
@@ -40,7 +41,7 @@ function StackNavigator() {
           backgroundColor: backgroundStylePrimary.backgroundColor,
         },
         headerMode: 'screen',
-        headerTintColor: backgroundStylePrimary.backgroundColor,
+        headerTintColor: textColorPrimary.color,
         headerStyle: {
           backgroundColor: backgroundStyleSecondary.backgroundColor,
           elevation: 0,
@@ -49,10 +50,11 @@ function StackNavigator() {
         presentation: 'transparentModal',
       }}>
       <Stack.Screen
-        name="Home"
+        name="HomeScreen"
         component={Home}
         options={{
-          headerTitle: 'Todo',
+          headerTitle: 'Home',
+          headerShown: false,
           // headerRight: () => <HeaderRight />,
         }}
       />

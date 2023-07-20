@@ -1,27 +1,24 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { Button } from 'native-base'
 
-import { Props } from './model'
+import { Box, VStack } from 'native-base'
 
-const styles = StyleSheet.create({
-  color: { color: 'red' },
-  separator: {
-    height: 10,
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    paddingHorizontal: 10,
-  },
-})
+import HeaderComponent from './components/Header'
+import Search from './components/Search'
+import Categories from './components/Categories'
+import Todos from './components/Todos'
 
-function Home({ navigation }: Props) {
+// { navigation }: Props
+
+function Home() {
   return (
-    <View style={styles.container}>
-      <Text>Hola </Text>
-      <Button onPress={() => navigation.navigate('Home')}>got to</Button>
-    </View>
+    <Box safeArea px="2">
+      <VStack mt={5} space={5} w="100%" alignSelf="center">
+        <HeaderComponent />
+        <Search />
+        <Categories />
+        <Todos />
+      </VStack>
+    </Box>
   )
 }
 

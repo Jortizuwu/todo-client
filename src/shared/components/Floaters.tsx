@@ -1,7 +1,6 @@
 import React from 'react'
-import { StatusBar } from 'expo-status-bar'
 import { Fab, Icon } from 'native-base'
-
+import { StatusBar } from 'expo-status-bar'
 import { Ionicons } from '@expo/vector-icons'
 
 import Logo from './Logo'
@@ -31,6 +30,9 @@ function Floaters() {
       />
       <Fab
         shadow={7}
+        right={2}
+        bottom={20}
+        renderInPortal={false}
         variant="unstyled"
         _dark={{
           bg: 'orange.50',

@@ -1,8 +1,9 @@
 import React from 'react'
-import { AddIcon } from 'native-base'
+import { Icon } from 'native-base'
+import Ionicons from '@expo/vector-icons/Ionicons'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 
-import { TodoStack, HomeStack } from '../stack'
+import { TodoStack, HomeStack, SettingsStack } from '../stack'
 import { RootTabsParamList, TABS } from './model'
 import useIsDarkMode from '../../../../shared/hooks/useDarkTheme'
 
@@ -11,19 +12,40 @@ const TABS_ROUTES: TABS[] = [
     id: 'home',
     name: 'Home',
     component: HomeStack,
-    Icon: <AddIcon />,
+    Icon: (
+      <Icon
+        alignContent="center"
+        alignItems="center"
+        size="6"
+        as={<Ionicons name="home-outline" />}
+      />
+    ),
   },
   {
     id: 'todos',
     name: 'Todos',
     component: TodoStack,
-    Icon: <AddIcon />,
+    Icon: (
+      <Icon
+        alignContent="center"
+        alignItems="center"
+        size="6"
+        as={<Ionicons name="layers-outline" />}
+      />
+    ),
   },
   {
-    id: 'history',
-    name: 'History',
-    component: TodoStack,
-    Icon: <AddIcon />,
+    id: 'settings',
+    name: 'Settings',
+    component: SettingsStack,
+    Icon: (
+      <Icon
+        alignContent="center"
+        alignItems="center"
+        size="6"
+        as={<Ionicons name="settings-outline" />}
+      />
+    ),
   },
 ]
 
@@ -35,12 +57,13 @@ function TabNavigation() {
 
   return (
     <Tab.Navigator
-      initialRouteName="Todos"
+      initialRouteName="Home"
       barStyle={{
         backgroundColor: backgroundStyleSecondary.backgroundColor,
+        height: 70,
       }}
-      activeColor={textColorPrimary.color}
-      inactiveColor={textColorSecondary.color}>
+      activeColor={textColorSecondary.color}
+      inactiveColor={textColorPrimary.color}>
       {TABS_ROUTES.map(val => (
         <Tab.Screen
           key={val.id}

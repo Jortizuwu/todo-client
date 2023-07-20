@@ -1,11 +1,11 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import HomeTodo from '../../../../screens/todo'
-import { RootStackTodoParamList } from '../model'
+import { RootStackSettingsParamList } from '../model'
+import SettingScreen from '../../../../screens/settings'
 import useIsDarkMode from '../../../../../shared/hooks/useDarkTheme'
 
-const Stack = createStackNavigator<RootStackTodoParamList>()
+const Stack = createStackNavigator<RootStackSettingsParamList>()
 function StackNavigator() {
   const { backgroundStylePrimary, backgroundStyleSecondary, textColorPrimary } =
     useIsDarkMode()
@@ -27,10 +27,10 @@ function StackNavigator() {
         presentation: 'transparentModal',
       }}>
       <Stack.Screen
-        name="HomeTodo"
-        component={HomeTodo}
+        name="SettingScreen"
+        component={SettingScreen}
         options={{
-          headerTitle: 'Todo',
+          headerTitle: 'Settings',
           // headerRight: () => <HeaderRight />,
         }}
       />

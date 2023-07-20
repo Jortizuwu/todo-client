@@ -1,5 +1,5 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { StackScreenProps } from '@react-navigation/stack'
 import { RootStackTodoParamList } from '../../app/navigator/stack/model'
 
 export interface Props
-  extends NativeStackScreenProps<RootStackTodoParamList, 'HomeTodo'> {}
+  extends StackScreenProps<RootStackTodoParamList, 'TodoScreen'> {}

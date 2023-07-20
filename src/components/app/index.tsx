@@ -9,6 +9,7 @@ import Floaters from '../../shared/components/Floaters'
 function App() {
   return (
     <NativeBaseProvider theme={BaseTheme}>
+      {/* <Layout /> */}
       <MainNavigator />
       <Floaters />
     </NativeBaseProvider>

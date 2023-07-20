@@ -1,8 +1,7 @@
 export type RootTabsParamList = {
   Todos: undefined
-  Updates: undefined
-  History: undefined
   Home: undefined
+  Settings: undefined
 }
 
 export interface TABS {
