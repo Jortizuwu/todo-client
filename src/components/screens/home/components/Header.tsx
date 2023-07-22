@@ -1,7 +1,9 @@
 import React from 'react'
 import { Avatar, HStack, Text, VStack } from 'native-base'
+import usePersistedStore from '../../../../store'
 
 function HeaderComponent() {
+  const { user } = usePersistedStore(state => state)
   return (
     <HStack space={[2, 3]} justifyContent="space-between">
       <VStack>
@@ -13,8 +15,8 @@ function HeaderComponent() {
           fontWeight="light">
           Hello
         </Text>
-        <Text bold fontSize="xl">
-          UserName
+        <Text bold fontSize="xl" textTransform="capitalize">
+          {user?.firstName}
         </Text>
       </VStack>
       <Avatar

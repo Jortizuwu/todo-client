@@ -64,9 +64,8 @@ function TabNavigation() {
         backgroundColor: backgroundStyleSecondary.backgroundColor,
         height: 70,
       }}
-      screenOptions={{
-        tabBarColor: '#757A',
-      }}
+      sceneAnimationType="shifting"
+      sceneAnimationEnabled
       activeColor={textColorSecondary.color}
       inactiveColor={textColorPrimary.color}>
       {TABS_ROUTES.map(val => (

@@ -1,13 +1,25 @@
 import React from 'react'
 import { Box, Fab, Icon, IconButton, Stagger, useDisclose } from 'native-base'
 import Ionicons from '@expo/vector-icons/Ionicons'
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
 
 import useIsDarkMode from '../hooks/useDarkTheme'
+import { RootStackRootParamList } from '../../components/app/navigator/stack/model'
+import usePersistedStore from '../../store'
 
+// const EXCLUE_LOCATIONS = ['TodoDetails']
+
+type NavigationProps = StackNavigationProp<RootStackRootParamList>
 function Floaters() {
   const { isOpen, onToggle } = useDisclose()
   const { colorMode, toggleColorMode } = useIsDarkMode()
+  const { navigate } = useNavigation<NavigationProps>()
+  const { user, removeUser } = usePersistedStore()
 
+  const handleNavigate = () => {
+    navigate('Auth')
+  }
   return (
     <>
       <Fab
@@ -86,10 +98,40 @@ function Floaters() {
             mb="4"
             variant="solid"
             bg="blue.400"
+            _pressed={{
+              bg: 'blue.300',
+            }}
+            onPress={() => {
+              navigate('TodoDetails', {
+                id: null,
+              })
+            }}
             colorScheme="blue"
             borderRadius="full"
             icon={
               <Icon as={<Ionicons name="add" />} size="6" color="warmGray.50" />
+            }
+          />
+          <IconButton
+            mb="4"
+            variant="solid"
+            bg={user ? 'red.400' : 'green.400'}
+            _pressed={{
+              bg: user ? 'red.300' : 'green.300',
+            }}
+            colorScheme="blue"
+            borderRadius="full"
+            onPress={user ? removeUser : handleNavigate}
+            icon={
+              <Icon
+                as={
+                  <Ionicons
+                    name={user ? 'log-out-outline' : 'log-in-outline'}
+                  />
+                }
+                size="6"
+                color="warmGray.50"
+              />
             }
           />
           <IconButton

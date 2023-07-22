@@ -1,23 +1,30 @@
 import { useQuery } from 'react-query'
+import { useRoute, RouteProp } from '@react-navigation/native'
 
 import todosServices from '../../services/todos'
 import QUERY_KEYS from '../../constants/queryKyes'
+import { RootStackRootParamList } from '../../../components/app/navigator/stack/model'
+
+export type RoutePropTypeRootStack = RouteProp<
+  RootStackRootParamList,
+  'TodoDetails'
+>
 
 export const useGetTodo = () => {
-  //   const [searchParams] = useSearchParams()
-  //   const params = useParams()
-  //   const qparams = searchParams.get('id')
-  //   const { data: publications, isLoading } = useQuery(
-  //     [QUERY_KEYS.TODO, params.id || qparams],
-  //     () => todosServices.getTodo(params.id || qparams),
-  //     {
-  //       enabled: !!params.id || !!qparams,
-  //     },
-  //   )
-  //   return {
-  //     publications,
-  //     isLoading,
-  //   }
+  const { params } = useRoute<RoutePropTypeRootStack>()
+
+  const { data: todo, isLoading } = useQuery(
+    [QUERY_KEYS.TODO, params?.id],
+    // TODO: CHANGE THIS
+    () => todosServices.getTodo(params.id !== null ? params?.id : ''),
+    {
+      enabled: !!params?.id,
+    },
+  )
+  return {
+    todo,
+    isLoading,
+  }
 }
 
 export const useListAllTodos = () => {

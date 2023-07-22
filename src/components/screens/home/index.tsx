@@ -11,6 +11,7 @@ function Home() {
   return (
     <Box
       safeArea
+      h="full"
       px="2"
       _dark={{
         background: 'dark.100',
@@ -19,12 +20,14 @@ function Home() {
         background: 'light.100',
       }}
       mt="1">
+      {/* <ScrollView contentContainerStyle={{ width: '100%' }}> */}
       <VStack space={5} w="100%" alignSelf="center">
         <HeaderComponent />
         <Search />
         <Categories />
-        <Todos />
       </VStack>
+      <Todos />
+      {/* </ScrollView> */}
     </Box>
   )
 }

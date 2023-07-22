@@ -1,6 +1,7 @@
 export type RootStackRootParamList = {
   Root: undefined
+  Auth: undefined
   TodoDetails: {
-    id: string
+    id: string | null
   }
 }

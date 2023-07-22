@@ -1,41 +1,21 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { HStack, Icon, IconButton } from 'native-base'
-import Ionicons from '@expo/vector-icons/Ionicons'
 
 import TabNavigation from '../../tabs'
 import Todo from '../../../../screens/todo'
 import { RootStackRootParamList } from '../model'
 import useIsDarkMode from '../../../../../shared/hooks/useDarkTheme'
+import HeaderRight from './Components/Header'
+import Login from '../../../../screens/auth'
+import usePersistedStore from '../../../../../store'
 
 const Stack = createStackNavigator<RootStackRootParamList>()
-
-function HeaderRight({ color = 'red.400' }: { color: string | undefined }) {
-  return (
-    <HStack>
-      <IconButton
-        variant="unstyled"
-        icon={
-          <Icon as={<Ionicons name="search-sharp" />} size="lg" color={color} />
-        }
-      />
-      <IconButton
-        variant="unstyled"
-        icon={
-          <Icon
-            as={<Ionicons name="ellipsis-vertical" />}
-            size="lg"
-            color={color}
-          />
-        }
-      />
-    </HStack>
-  )
-}
 
 function StackNavigator() {
   const { backgroundStylePrimary, backgroundStyleSecondary, textColorPrimary } =
     useIsDarkMode()
+
+  const user = usePersistedStore(state => state.user)
 
   return (
     <Stack.Navigator
@@ -71,6 +51,15 @@ function StackNavigator() {
           headerRight: ({ tintColor }) => <HeaderRight color={tintColor} />,
         }}
       />
+      {!user && (
+        <Stack.Screen
+          name="Auth"
+          component={Login}
+          options={{
+            headerTitle: 'auth',
+          }}
+        />
+      )}
     </Stack.Navigator>
   )
 }

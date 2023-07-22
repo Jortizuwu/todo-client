@@ -4,14 +4,12 @@ import { NativeBaseProvider } from 'native-base'
 
 import MainNavigator from './navigator'
 import { BaseTheme } from '../../shared/theme'
-import Floaters from '../../shared/components/Floaters'
 
 function App() {
   return (
     <NativeBaseProvider theme={BaseTheme}>
       {/* <Layout /> */}
       <MainNavigator />
-      <Floaters />
     </NativeBaseProvider>
   )
 }

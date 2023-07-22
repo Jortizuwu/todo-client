@@ -5,6 +5,27 @@ export interface Todos {
   todos: Todo[]
 }
 
+export type Role = {
+  name: string
+  id: string
+}
+
+export interface User {
+  uid: string
+  email: string
+  firstName: string
+  lastName?: string
+  isActive: boolean
+  roles: Role[]
+  createdAt: Date
+  updatedAt: Date
+}
+
+export interface loginResponse {
+  user: User
+  token: string
+}
+
 export interface Todo {
   id: string
   title: string
@@ -24,4 +45,14 @@ export interface Creator {
   isActive: boolean
   createdAt: string
   updatedAt: string
+}
+
+export interface createOrUpdateTodoBody {
+  title: string
+  description?: string | null
+}
+
+export interface login {
+  email: string
+  password: string
 }

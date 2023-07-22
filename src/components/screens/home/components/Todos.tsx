@@ -1,57 +1,18 @@
 import React from 'react'
 
-import { FlatList, Heading, View } from 'native-base'
+import { Center, FlatList, Heading, Spinner } from 'native-base'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
-import { RootStackTodoParamList } from '../../../app/navigator/stack/model'
+import { RootStackRootParamList } from '../../../app/navigator/stack/model'
 import Card from '../../../../shared/components/Card'
+import { useListAllTodos } from '../../../../shared/hooks/react-query/todo'
 
-type NavigationProps = StackNavigationProp<RootStackTodoParamList>
+type NavigationProps = StackNavigationProp<RootStackRootParamList>
 
-const data = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    fullName: 'Aafreen Khan',
-    timeStamp: '12:47 PM',
-    recentText:
-      'Good Day! https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwgu1A5zgPSvfE83nurkuzNEoXs9DMNr8Ww&usqp=CAU',
-    avatarUrl:
-      'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    fullName: 'Sujitha Mathur',
-    timeStamp: '11:11 PM',
-    recentText: 'Cheer up, there!',
-    avatarUrl:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyEaZqT3fHeNrPGcnjLLX1v_W4mvBlgpwxnA&usqp=CAU',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    fullName: 'Anci Barroco',
-    timeStamp: '6:22 PM',
-    recentText: 'Good Day!',
-    avatarUrl: 'https://miro.medium.com/max/1400/0*0fClPmIScV5pTLoE.jpg',
-  },
-  {
-    id: '68694a0f-3da1-431f-bd56-142371e29d72',
-    fullName: 'Aniket Kumar',
-    timeStamp: '8:56 PM',
-    recentText: 'All the best',
-    avatarUrl:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr01zI37DYuR8bMV5exWQBSw28C1v_71CAh8d7GP1mplcmTgQA6Q66Oo--QedAN1B4E1k&usqp=CAU',
-  },
-  {
-    id: '28694a0f-3da1-471f-bd96-142456e29d72',
-    fullName: 'Kiara',
-    timeStamp: '12:47 PM',
-    recentText: 'I will call today.',
-    avatarUrl:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwgu1A5zgPSvfE83nurkuzNEoXs9DMNr8Ww&usqp=CAU',
-  },
-]
 function Todos() {
+  const { isLoading, todos } = useListAllTodos()
+
   const { navigate } = useNavigation<NavigationProps>()
   const handlePress = (id: string) => {
     navigate('TodoDetails', {
@@ -59,17 +20,27 @@ function Todos() {
     })
   }
 
+  if (isLoading)
+    return (
+      <Center>
+        <Spinner mt="5" size="lg" />
+      </Center>
+    )
+
   return (
-    <View>
-      <Heading mb="2">Users todos</Heading>
+    <>
+      <Heading mb="2" mt="4">
+        Users todos
+      </Heading>
       <FlatList
-        data={data}
+        scrollEnabled
+        data={todos?.todos}
         renderItem={({ item }) => (
           <Card handlePress={() => handlePress(item.id)} todo={item} />
         )}
         keyExtractor={item => item.id}
       />
-    </View>
+    </>
   )
 }
 

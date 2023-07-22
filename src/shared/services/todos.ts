@@ -1,11 +1,10 @@
 import todoApi from '../common/api'
-import { Todos } from '../common/interface'
+import { Todo, Todos, createOrUpdateTodoBody } from '../common/interface'
 
 const todoService = {
-  // normal
-  createTodo: async values => {
-    const response = await todoApi.post('/todo', values)
-    return response.data.data
+  createTodo: async (values: createOrUpdateTodoBody) => {
+    const response = await todoApi.post<Todo>('/todo', values)
+    return response.data
   },
 
   listAllTodo: async () => {
@@ -14,8 +13,13 @@ const todoService = {
   },
 
   getTodo: async (id: string) => {
-    const response = await todoApi.get(`/todo/${id}`)
-    return response.data.data
+    const response = await todoApi.get<Todo>(`/todo/${id}`)
+    return response.data
+  },
+
+  updateTodo: async (id: string, values: createOrUpdateTodoBody) => {
+    const response = await todoApi.patch<Todo>(`/todo/${id}`, values)
+    return response.data
   },
 }
 

@@ -2,11 +2,11 @@ import { Ionicons } from '@expo/vector-icons'
 import { HStack, Icon, Text, VStack, Pressable } from 'native-base'
 import React from 'react'
 import useIsDarkMode from '../hooks/useDarkTheme'
+import { Todo } from '../common/interface'
 
 interface Props {
   handlePress: () => void
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  todo: any
+  todo: Todo
 }
 
 function Card({ handlePress, todo }: Props) {
@@ -26,10 +26,7 @@ function Card({ handlePress, todo }: Props) {
             }}
             alignItems="flex-start"
             justifyContent="space-between"
-            // width="full"
-            // flexDirection="column"
             borderRadius="xl"
-            // shadow="1"
             p="4"
             mb="3"
             background={backgroundStyleSecondary.backgroundColor}>
@@ -42,14 +39,14 @@ function Card({ handlePress, todo }: Props) {
               />
               <VStack ml="2">
                 <Text fontSize="md" bold>
-                  {todo.fullName}
+                  {todo.title}
                 </Text>
                 <Text fontSize="sm" isTruncated textAlign="justify">
-                  {todo.recentText}
+                  {todo.description}
                 </Text>
               </VStack>
             </HStack>
-            <Text fontSize="xs">{todo.timeStamp}</Text>
+            <Text fontSize="xs">{todo.createdAt}</Text>
           </HStack>
         )
       }}
