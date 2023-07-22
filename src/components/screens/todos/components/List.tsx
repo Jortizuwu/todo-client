@@ -4,18 +4,18 @@ import { FlatList, Heading, View } from 'native-base'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
-import { RootStackTodoParamList } from '../../../app/navigator/stack/model'
 import Card from '../../../../shared/components/Card'
+import { RootStackRootParamList } from '../../../app/navigator/stack/model'
+// import { useListAllTodos } from '../../../../shared/hooks/react-query/todo'
 
-type NavigationProps = StackNavigationProp<RootStackTodoParamList>
+type NavigationProps = StackNavigationProp<RootStackRootParamList>
 
 const data = [
   {
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
     fullName: 'Aafreen Khan',
     timeStamp: '12:47 PM',
-    recentText:
-      'Good Day! https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwgu1A5zgPSvfE83nurkuzNEoXs9DMNr8Ww&usqp=CAU',
+    recentText: 'Good Day!',
     avatarUrl:
       'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
   },
@@ -51,13 +51,20 @@ const data = [
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwgu1A5zgPSvfE83nurkuzNEoXs9DMNr8Ww&usqp=CAU',
   },
 ]
-function Todos() {
+
+function TotoList() {
   const { navigate } = useNavigation<NavigationProps>()
-  const handlePress = (id: string) => {
+  // const { todos, isLoading } = useListAllTodos()
+
+  const handelPress = (id: string) => {
     navigate('TodoDetails', {
       id,
     })
   }
+
+  // if (isLoading) return <Spinner />
+
+  // console.log(todos)
 
   return (
     <View>
@@ -65,7 +72,7 @@ function Todos() {
       <FlatList
         data={data}
         renderItem={({ item }) => (
-          <Card handlePress={() => handlePress(item.id)} todo={item} />
+          <Card todo={item} handlePress={() => handelPress(item.id)} />
         )}
         keyExtractor={item => item.id}
       />
@@ -73,4 +80,4 @@ function Todos() {
   )
 }
 
-export default Todos
+export default TotoList

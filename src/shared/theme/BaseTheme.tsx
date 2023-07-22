@@ -23,6 +23,7 @@ const BaseTheme = extendTheme({
       900: '#0d0c0d',
     },
     dark: {
+      100: '#202020',
       primary: '#202020',
       secondary: '#171717',
       textPrimary: '#fff',
@@ -30,6 +31,7 @@ const BaseTheme = extendTheme({
       textTertiary: '#FFD100',
     },
     light: {
+      100: '#F3F4F8',
       primary: '#F3F4F8',
       secondary: '#F9F9F9',
       textPrimary: '#000',
@@ -43,7 +45,7 @@ const BaseTheme = extendTheme({
 
   config: {
     // Changing initialColorMode to 'dark'
-    initialColorMode: 'dark',
+    // initialColorMode: 'dark',
   },
 })
 

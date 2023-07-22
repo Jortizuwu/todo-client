@@ -1,11 +1,12 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
-import BottomNavigation from './tabs'
+
+import RootStack from './stack'
 
 function Main() {
   return (
     <NavigationContainer>
-      <BottomNavigation />
+      <RootStack />
     </NavigationContainer>
   )
 }

@@ -4,14 +4,16 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 
 import { RootTabsParamList, TABS } from './model'
-import { HomeStack, SettingsStack, TodoStack } from '../stack'
 import useIsDarkMode from '../../../../shared/hooks/useDarkTheme'
+import Settings from '../../../screens/settings'
+import Home from '../../../screens/home'
+import Todos from '../../../screens/todos'
 
 const TABS_ROUTES: TABS[] = [
   {
     id: 'home',
     name: 'Home',
-    component: HomeStack,
+    component: Home,
     Icon: (
       <Icon
         alignContent="center"
@@ -24,7 +26,7 @@ const TABS_ROUTES: TABS[] = [
   {
     id: 'todos',
     name: 'Todos',
-    component: TodoStack,
+    component: Todos,
     Icon: (
       <Icon
         alignContent="center"
@@ -37,7 +39,7 @@ const TABS_ROUTES: TABS[] = [
   {
     id: 'settings',
     name: 'Settings',
-    component: SettingsStack,
+    component: Settings,
     Icon: (
       <Icon
         alignContent="center"
@@ -61,6 +63,9 @@ function TabNavigation() {
       barStyle={{
         backgroundColor: backgroundStyleSecondary.backgroundColor,
         height: 70,
+      }}
+      screenOptions={{
+        tabBarColor: '#757A',
       }}
       activeColor={textColorSecondary.color}
       inactiveColor={textColorPrimary.color}>

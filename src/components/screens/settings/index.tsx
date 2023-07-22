@@ -45,7 +45,16 @@ const data = [
 
 function Settings() {
   return (
-    <Box>
+    <Box
+      safeArea
+      h="full"
+      px="2"
+      _dark={{
+        background: 'dark.100',
+      }}
+      _light={{
+        background: 'light.100',
+      }}>
       <Center py="10">
         <Icon
           alignContent="center"
@@ -73,7 +82,7 @@ function Settings() {
           </HStack>
         )}
       />
-      <Divider />
+      {/* <Divider /> */}
     </Box>
   )
 }

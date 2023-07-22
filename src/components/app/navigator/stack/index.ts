@@ -1,5 +1,3 @@
-import TodoStack from './todos'
-import HomeStack from './home'
-import SettingsStack from './settings'
+import RootStack from './root'
 
-export { TodoStack, HomeStack, SettingsStack }
+export default RootStack

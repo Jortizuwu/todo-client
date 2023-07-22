@@ -1,5 +1,5 @@
 import { StackScreenProps } from '@react-navigation/stack'
-import { RootStackHomeParamList } from '../../app/navigator/stack/model'
+import { RootStackRootParamList } from '../../app/navigator/stack/model'
 
 export interface Props
-  extends StackScreenProps<RootStackHomeParamList, 'HomeScreen'> {}
+  extends StackScreenProps<RootStackRootParamList, 'Root'> {}

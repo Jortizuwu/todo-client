@@ -1,20 +1,6 @@
-export type RootStackTodoParamList = {
-  TodoScreen: undefined
+export type RootStackRootParamList = {
+  Root: undefined
   TodoDetails: {
     id: string
   }
-}
-
-export type RootStackHomeParamList = {
-  HomeScreen: undefined
-  TodoDetails: {
-    id: string
-  }
-}
-
-export type RootStackSettingsParamList = {
-  SettingScreen: undefined
-  // TodoDetails: {
-  //   id: string
-  // }
 }
