@@ -9,6 +9,7 @@ import QUERY_KEYS from '../../../../shared/constants/queryKyes'
 import authService from '../../../../shared/services/auth'
 import { RootStackRootParamList } from '../../../app/navigator/stack/model'
 import usePersistedStore from '../../../../store'
+import useNotification from '../../../../shared/hooks/useNotification'
 
 type NavigationProps = StackNavigationProp<RootStackRootParamList>
 
@@ -32,6 +33,7 @@ export const useDefaultValues = () => {
   const queryClient = useQueryClient()
   const { navigate } = useNavigation<NavigationProps>()
   const { setUser } = usePersistedStore(state => state)
+  const { addToast } = useNotification()
 
   const login = useCallback(
     async (values: FormData) => {
@@ -41,12 +43,13 @@ export const useDefaultValues = () => {
           email: values.email.toLowerCase(),
         })
         setUser(resp)
+        addToast('wellcome back', { code: 'SUCCESS' })
         navigate('Root')
       } catch (error) {
-        console.log(error)
+        addToast('opps!!!', { code: 'ERROR' })
       }
     },
-    [navigate, setUser],
+    [navigate, setUser, addToast],
   )
 
   const { mutate, isLoading } = useMutation(login, {

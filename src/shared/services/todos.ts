@@ -12,7 +12,7 @@ const todoService = {
     return response.data
   },
 
-  getTodo: async (id: string) => {
+  getTodo: async (id: string | null) => {
     const response = await todoApi.get<Todo>(`/todo/${id}`)
     return response.data
   },

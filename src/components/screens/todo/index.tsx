@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import {
   Box,
   Button,
@@ -12,7 +12,6 @@ import {
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { useGetTodo } from '../../../shared/hooks/react-query/todo'
 import { schema, useDefaultValues } from './utils/create'
 
 export type FormData = {
@@ -21,14 +20,12 @@ export type FormData = {
 }
 
 function Todo() {
-  const { isLoading, todo } = useGetTodo()
-
   const {
     formValues: { defaultValues },
-    isLoading: isLoadingCreateOrUpdate,
+    isLoading,
     status,
     submit,
-  } = useDefaultValues(todo)
+  } = useDefaultValues()
 
   const {
     handleSubmit,
@@ -40,12 +37,21 @@ function Todo() {
     defaultValues,
     resolver: yupResolver(schema),
   })
+  const prevDefaultValuesRef = useRef(defaultValues)
 
   useEffect(() => {
-    reset(defaultValues)
+    const prevDefaultValues = prevDefaultValuesRef.current
+    const currentDefaultValues = defaultValues
+
+    if (
+      JSON.stringify(currentDefaultValues) !== JSON.stringify(prevDefaultValues)
+    ) {
+      reset(currentDefaultValues)
+      prevDefaultValuesRef.current = currentDefaultValues
+    }
   }, [defaultValues, reset])
 
-  if (isLoading || isLoadingCreateOrUpdate)
+  if (isLoading)
     return (
       <Center>
         <Spinner mt="5" size="lg" />
@@ -85,7 +91,7 @@ function Todo() {
                 h="90%"
                 onBlur={onBlur}
                 onChangeText={onChange}
-                value={value || ''}
+                value={value || undefined}
                 size="xl"
                 aria-label="description"
                 variant="unstyled"

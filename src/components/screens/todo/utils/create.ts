@@ -1,40 +1,54 @@
 import { useCallback } from 'react'
 import * as Yup from 'yup'
 import { useMutation, useQueryClient } from 'react-query'
-import { useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
 
 import { FormData } from '..'
 import QUERY_KEYS from '../../../../shared/constants/queryKyes'
 import todoService from '../../../../shared/services/todos'
-import { RoutePropTypeRootStack } from '../../../../shared/hooks/react-query/todo'
-import { Todo } from '../../../../shared/common/interface'
+import {
+  RoutePropTypeRootStack,
+  useGetTodo,
+} from '../../../../shared/hooks/react-query/todo'
+import { RootStackRootParamList } from '../../../app/navigator/stack/model'
+import useNotification from '../../../../shared/hooks/useNotification'
+
+type NavigationProps = StackNavigationProp<RootStackRootParamList>
 
 export const schema = Yup.object()
   .shape({
     title: Yup.string().required('Title required!').min(1).trim(),
-    description: Yup.string().nullable(),
+    description: Yup.string(),
   })
   .required()
 
 const initValues = {
   title: '',
-  description: '',
+  description: undefined,
 }
 
-export const useDefaultValues = (todo: Todo | undefined) => {
-  const { params } = useRoute<RoutePropTypeRootStack>()
+export const useDefaultValues = () => {
   const queryClient = useQueryClient()
+  const { addToast } = useNotification()
+  const { todo, isLoading: isLoadingGet } = useGetTodo()
+  const { params } = useRoute<RoutePropTypeRootStack>()
+  const { navigate } = useNavigation<NavigationProps>()
 
-  const create = useCallback(async (values: FormData) => {
-    try {
-      await todoService.createTodo({
-        ...values,
-      })
-      // navigate('/jobs')
-    } catch (error) {
-      console.log(error)
-    }
-  }, [])
+  const create = useCallback(
+    async (values: FormData) => {
+      try {
+        await todoService.createTodo({
+          ...values,
+        })
+        addToast('todo create', { code: 'SUCCESS' })
+        navigate('Root')
+      } catch (error) {
+        addToast('opps!!', { code: 'ERROR' })
+      }
+    },
+    [navigate, addToast],
+  )
 
   const update = useCallback(
     async (values: FormData) => {
@@ -43,12 +57,12 @@ export const useDefaultValues = (todo: Todo | undefined) => {
         await todoService.updateTodo(params.id, {
           ...values,
         })
-        // navigate('/jobs')
+        addToast('todo create', { code: 'SUCCESS' })
       } catch (error) {
-        console.log(error)
+        addToast('opps!!', { code: 'ERROR' })
       }
     },
-    [params],
+    [params, addToast],
   )
 
   const { mutate, isLoading } = useMutation(params.id ? update : create, {
@@ -58,10 +72,15 @@ export const useDefaultValues = (todo: Todo | undefined) => {
   })
 
   return {
-    isLoading,
+    isLoading: isLoadingGet || isLoading,
     submit: mutate,
     formValues: {
-      defaultValues: todo || initValues,
+      defaultValues: todo
+        ? {
+            title: todo.title,
+            description: todo.description,
+          }
+        : initValues,
     },
     status: params.id ? 'Edit' : 'Create',
     isEditing: !!params.id,

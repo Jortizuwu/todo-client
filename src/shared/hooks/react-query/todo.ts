@@ -16,7 +16,7 @@ export const useGetTodo = () => {
   const { data: todo, isLoading } = useQuery(
     [QUERY_KEYS.TODO, params?.id],
     // TODO: CHANGE THIS
-    () => todosServices.getTodo(params.id !== null ? params?.id : ''),
+    () => todosServices.getTodo(params.id),
     {
       enabled: !!params?.id,
     },

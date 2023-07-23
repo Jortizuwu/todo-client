@@ -1,9 +1,8 @@
 import React from 'react'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 import AppProvider from './src/components/app'
-
 import 'react-native-gesture-handler'
-import { QueryClient, QueryClientProvider } from 'react-query'
 
 const queryClient = new QueryClient()
 

@@ -9,8 +9,8 @@ import { RootStackRootParamList } from '../../components/app/navigator/stack/mod
 import usePersistedStore from '../../store'
 
 // const EXCLUE_LOCATIONS = ['TodoDetails']
-
 type NavigationProps = StackNavigationProp<RootStackRootParamList>
+
 function Floaters() {
   const { isOpen, onToggle } = useDisclose()
   const { colorMode, toggleColorMode } = useIsDarkMode()

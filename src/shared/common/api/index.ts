@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios'
 
 const todoApi = axios.create({
-  baseURL: 'http://192.168.88.9:8080/api',
+  baseURL: 'http://192.168.88.8:8080/api',
 })
 
 todoApi.interceptors.request.use(async confing => {
