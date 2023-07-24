@@ -1,17 +1,31 @@
 import React from 'react'
 
-import { Center, FlatList, Heading, Spinner } from 'native-base'
+import { Box, FlatList, Heading } from 'native-base'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
-import { RootStackRootParamList } from '../../../app/navigator/stack/model'
 import Card from '../../../../shared/components/Card'
+import { RootStackRootParamList } from '../../../app/navigator/stack/model'
 import { useListAllTodos } from '../../../../shared/hooks/react-query/todo'
 
 type NavigationProps = StackNavigationProp<RootStackRootParamList>
 
+const todo = [
+  {
+    id: '123',
+    title: '12312',
+    description: '12312',
+  },
+  {
+    id: '123',
+    title: '12312',
+    description: '12312',
+  },
+]
+// export const Separator = () => <View style={styles.separator} />
+
 function Todos() {
-  const { isLoading, todos } = useListAllTodos()
+  // const { isLoading, todos } = useListAllTodos()
 
   const { navigate } = useNavigation<NavigationProps>()
   const handlePress = (id: string) => {
@@ -20,12 +34,12 @@ function Todos() {
     })
   }
 
-  if (isLoading)
-    return (
-      <Center>
-        <Spinner mt="5" size="lg" />
-      </Center>
-    )
+  // if (isLoading)
+  //   return (
+  //     <Center>
+  //       <Spinner mt="5" size="lg" />
+  //     </Center>
+  //   )
 
   return (
     <>
@@ -34,10 +48,12 @@ function Todos() {
       </Heading>
       <FlatList
         scrollEnabled
-        data={todos?.todos}
+        data={todo}
         renderItem={({ item }) => (
           <Card handlePress={() => handlePress(item.id)} todo={item} />
         )}
+        // eslint-disable-next-line react/no-unstable-nested-components
+        ItemSeparatorComponent={() => <Box h="5" />}
         keyExtractor={item => item.id}
       />
     </>

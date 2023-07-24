@@ -25,8 +25,8 @@ function Home() {
         <HeaderComponent />
         <Search />
         <Categories />
+        <Todos />
       </VStack>
-      <Todos />
       {/* </ScrollView> */}
     </Box>
   )
